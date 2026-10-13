@@ -12,6 +12,32 @@ INSTANCEMETHODS::
 EXAMPLES::
 
 code::
+////// INSTALLATION //////
+/*
+The whole Class folder should be placed in the Extensions folder that SuperCollider points to. The default path is usually:
+
+/Library/Application Support/SuperCollider/Extensions/
+
+You can also double check the path with the .dir method in SC.
+
+In alternative, you can istall the quark directly from SC:
+*/
+// install the quark
+Quarks.install("https://github.com/dariomorrr/cybernetic-toolkit")
+
+// recompile
+thisProcess.recompile;
+
+
+
+// SYNTHS INSTANTIATION
+// In SC, just call:
+
+CyberneticToolkit.load;
+
+
+
+////// PATCHES EXAMPLES //////
 
 // NO-INPUT RESONATOR
 // A self-oscillating feedback patch that uses Combs and Resonant filters, the frequency sequencing results by parameters affected by feedback too
