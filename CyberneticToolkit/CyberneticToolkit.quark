@@ -1,0 +1,9 @@
+(
+	\name: 			"CyberneticToolkit",
+	\summary:		"A CyberneticToolkit to make music",
+	\author: 		"Dario Gatto",
+	\organisation:	"",
+	\helpdoc:		"help",
+	\since: 		"2026",
+	\version:		0.1
+)

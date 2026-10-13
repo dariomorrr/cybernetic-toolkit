@@ -1,0 +1,95 @@
+TITLE:: CyberneticToolkit
+summary:: Synths for cybernetic exploration
+categories:: Undocumented classes
+
+DESCRIPTION::
+A collection of SuperCollider patches realised in the context of my Master degree thesis at SMET School (Conservatory of Turin, Italy) in 2026. This toolkit is aimed at exploring cybernetic composition and sound design, though a variety of architectures and approaches.
+
+
+INSTANCEMETHODS::
+
+
+EXAMPLES::
+
+code::
+
+// NO-INPUT RESONATOR
+// A self-oscillating feedback patch that uses Combs and Resonant filters, the frequency sequencing results by parameters affected by feedback too
+
+// with the default parameters, the frequecny stepper works in a [-12, 12] range, with a step of -4;
+Synth(\noinReson01);
+
+// change them as arguments
+Synth(\noinReson01, [\stepMin, -15, \stepMax, 4, step: -1]);
+Synth(\noinReson01, [\stepMin, -11, \stepMax, 7, step: -7]);
+
+
+
+// CRICKETS
+// with the default parameters, it emulates an organic chorus of insects
+Synth(\crickets);
+
+// changing the noiseQ, density, frequency and baseFrequency arguments will change the behaviour, quite drastically in some cases and possibly exiting the "cricket chorus" timbre
+// NOTE: the baseFrequency is set to receive midicps values, the general freqency is set to recive Hz values.
+Synth(\crickets, [\noiseQ, 37, \freq, 15100, \baseFreq, 67, \dens, 4]);
+Synth(\crickets, [\noiseQ, 7, \freq, 11100, \baseFreq, 367, \dens, 0.1]);
+
+
+
+// BUFFER SCRUBBER
+// the patch uses a buffer as source material and passes it into cybernetic re-parametrisation
+
+// You'll need to allocate a buffer with a usable soundfile:
+(
+Buffer.freeAll;
+b = Buffer.read(s, ExampleFiles.child /* insert a valid audio path here in place of the example*/);
+)
+
+//
+x = Synth(\bufScrub01, [\buf, b]);
+x.free;
+
+
+
+// CYBER LISTENER
+// the patch listens to the input to break/start the buffer playback, also influenced by feedback
+
+// IMPORTANT NOTE: BEWARE OF FEEDBACK WHEN SETTING INPUT AND OUTPUT!!
+
+// You'll need to allocate a buffer with a usable soundfile:
+(
+Buffer.freeAll;
+b = Buffer.read(s, ExampleFiles.child /* insert a valid audio path here in place of the example*/);
+)
+
+Synth(\cyberListener);
+
+
+
+// DOUBLE WELL HYSTERESIS
+// This patch uses the bistable character of the Double Well re-parametrised via cybernetic principles, and is very sensible to the interactions between Hasher, Hénon, Peak Filter and High Shelf frequencies
+
+// default
+Synth(\dwHyster, [\hasherFq, 34520, \henonFq, 230, \peakFq, 250, \shelfFq, 7200]);
+
+// variants
+Synth(\dwHyster, [\hasherFq, 14520, \henonFq, 1230, \peakFq, 1450, \shelfFq, 6200]);
+Synth(\dwHyster, [\hasherFq, 4520, \henonFq, 30, \peakFq, 7050, \shelfFq, 350]);
+Synth(\dwHyster, [\hasherFq, 24520, \henonFq, 130, \peakFq, 4050, \shelfFq, 8350]);
+
+
+
+// GRAINS TO HÉNON
+// This patch is a feedback modulation of a chaotic Hénon map and granular sine impulses, useful throughout the whole frequency spectrum
+
+// default settings
+Synth(\grains2henon, [\freqA, 145, \freqB, 123, \pitchShift, 2.0, \dens, 15, \lfoFq, 0.1]);
+
+// variants
+Synth(\grains2henon, [\freqA, 48.1, \freqB, 48, \pitchShift, 2.0, \dens, 15, \lfoFq, 0.1]); // neurobass territory
+Synth(\grains2henon, [\freqA, 1045, \freqB, 1203, \pitchShift, 3.0, \dens, 5, \lfoFq, 0.1]);
+Synth(\grains2henon, [\freqA, 12048.1, \freqB, 10048, \pitchShift, 0.5, \dens, 1, \lfoFq, 0.14]);
+
+
+
+::
