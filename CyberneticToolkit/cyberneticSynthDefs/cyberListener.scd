@@ -66,6 +66,6 @@ SynthDef(\cyberListener, {
 
     sig = sig * gateEnv * retriggerFade;
 
-	Out.ar(0, (sig!2 + input!2) * amp);
+	Out.ar(0, (sig + input) * amp);
 }).add;
 )
