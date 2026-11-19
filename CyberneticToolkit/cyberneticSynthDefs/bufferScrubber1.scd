@@ -31,7 +31,7 @@ SynthDef(\bufScrub01, {|buf=0|
     sigs = (sigMul * sig1).tanh;
     sigs = (sigs + fbIn.fold2).tanh;
 
-	pBuf = PlayBuf.ar(2, buf, \rate3.kr(1.1) * zc.explin(10, 20 + fbAmp.linlin(0,1,10,\targetZc.kr(2000)), 0, 1) - fbAmp, Dust.ar(sigMul * 10), 0.0, 1);
+	pBuf = PlayBuf.ar(2, buf, \rate3.kr(1.1) * zc.explin(10, 20 + fbAmp.linlin(0,1,10,\targetZc.kr(1000)), 0, 1) - fbAmp, Dust.ar(sigMul * 10), 0.0, 1);
 	pBuf = CrossoverDistortion.ar(pBuf, \distamp.kr(0.01), \distsmooth.kr(0.9));
 
 	sigs = (sigs + pBuf).tanh;
