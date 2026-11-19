@@ -21,17 +21,17 @@ SynthDef(\bufScrub01, {|buf=0|
     fbAmp = fbAmp.linlin(0, 1, 0.01, 0.9);
     zc = ZeroCrossing.ar(fbIn);
 
-	sig1 = PlayBuf.ar(2, buf, \rate1.kr(1.0) + fbAmp, Dust.ar(\dens1.ar(16)) * zc.tanh, fbIn / 2, 1);
+	sig1 = PlayBuf.ar(2, buf, \rate1.kr(1.0) + fbAmp, Dust.ar(\dens1.ar(16)) * zc.tanh, (fbIn * 0.5 + 0.5) * BufFrames.kr(buf), 1);
 
 
-	sig2 = PlayBuf.ar(2, buf, \rate2.kr(1.0) - fbAmp, Dust.ar(\dens2.ar(15)) * fbIn, zc.tanh, 1);
+	sig2 = PlayBuf.ar(2, buf, \rate2.kr(1.0) - fbAmp, Dust.ar(\dens2.ar(15)) * fbIn, zc.explin(20, 5000, 0.0, 1.0) * BufFrames.kr(buf), 1);
 
 
     sigMul = (sig1 * sig2).fold2;
     sigs = (sigMul * sig1).tanh;
     sigs = (sigs + fbIn.fold2).tanh;
 
-	pBuf = PlayBuf.ar(2, buf, \rate3.kr(1.1) * zc.clip - fbAmp, Dust.ar(sigMul * 10), 0.0, 1);
+	pBuf = PlayBuf.ar(2, buf, \rate3.kr(1.1) * zc.explin(10, 20 + fbAmp.linlin(0,1,10,\targetZc.kr(2000)), 0, 1) - fbAmp, Dust.ar(sigMul * 10), 0.0, 1);
 	pBuf = CrossoverDistortion.ar(pBuf, \distamp.kr(0.01), \distsmooth.kr(0.9));
 
 	sigs = (sigs + pBuf).tanh;
