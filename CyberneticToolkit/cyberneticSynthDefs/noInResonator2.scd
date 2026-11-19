@@ -10,9 +10,9 @@ SynthDef(\noinReson02, {
 	var snd, fb, env, trig, freqStep;
 	fb = LocalIn.ar(1);
 	env = Amplitude.ar(fb, 0.0001);
-	trig = (HPZ1.ar(env) > 0.01) & (env > \threshold.kr(0.001));
+	trig = (HPZ1.ar(env) > 0.01) * (env > \threshold.kr(0.001));
 
-	freqStep = Stepper.ar(HenonC.ar(10*env.linlin(-1,1,0.5,2.0)) + trig.linlin(0, 1, -1, 1), reset: 0, min: -12, max: 12, step: 1);
+	freqStep = Stepper.ar(HenonC.ar(10*env.linlin(0,1,0.5,2.0)) + trig.linlin(0, 1, -1, 1), reset: 0, min: -12, max: 12, step: 1);
 	freqStep = Lag.ar(freqStep, 0.5 + env);
 	snd = Limiter.ar(LeakDC.ar(CombC.ar(fb, 1.1, 0.1, 1.0 - fb.linlin(-1,1,0.1, 0.5))));
 	snd = (CrossoverDistortion.ar(snd, 10.5, 0.9, 1000)).tanh;
