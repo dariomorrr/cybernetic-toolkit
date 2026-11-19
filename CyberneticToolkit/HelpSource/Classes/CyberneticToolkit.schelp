@@ -80,6 +80,10 @@ x = Synth(\bufScrub01, [\buf, b, \targetZc, 100]); // lower values will result i
 x = Synth(\bufScrub01, [\buf, b, \targetZc, 2000]); // quite noisy, recognisable audio still comes back 
 x.free;
 
+// version 02 and 03 have a direct position argument
+x = Synth(\bufScrub02, [\buf, b, \amp, 0.15, \pos, 0.2]);
+x = Synth(\bufScrub03, [\buf, b, \amp, 0.15, \pos, 0.7]);
+
 
 
 // CYBER LISTENER
