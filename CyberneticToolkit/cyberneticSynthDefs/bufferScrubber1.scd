@@ -37,6 +37,6 @@ SynthDef(\bufScrub01, {|buf=0|
 	sigs = (sigs + pBuf).tanh;
 
     LocalOut.ar(pBuf);
-	Out.ar(0, Pan2.ar(Mix(pBuf + (sigs))) * \amp.kr(0.2));
+	Out.ar(0, (pBuf + (sigs)) * \amp.kr(0.2));
 }).add;
 )
