@@ -39,12 +39,12 @@ SynthDef(\bufScrub03, {|buf=0|
     sigs = (sigMul * sig1).tanh;
     sigs = (sigs + fbIn.fold2).tanh;
 
-	pBuf = PlayBuf.ar(2, buf, sigs.linlin(-1, 1, 0, 1), Dust.ar(sigMul * 10), 0, 0, 0,);
+	pBuf = PlayBuf.ar(2, buf, sigs.linlin(-1, 1, 0, 1), Dust.ar(sigMul * 10), \pos.kr(0.0), 0, 0);
 	pBuf = CrossoverDistortion.ar(pBuf, \distamp.kr(0.01), \distsmooth.kr(0.9));
 
 	sigs = (sigs + pBuf).tanh;
 
     LocalOut.ar(pBuf);
-	Out.ar(0, Pan2.ar(Mix(pBuf + (sigs * -5.dbamp))) * \amp.kr(0.8));
+	Out.ar(0, (pBuf + (sigs * -5.dbamp)) * \amp.kr(0.8));
 }).add;
 )
