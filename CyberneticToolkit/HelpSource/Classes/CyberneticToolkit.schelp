@@ -73,6 +73,11 @@ b = Buffer.read(s, ExampleFiles.child /* insert a valid audio path here in place
 
 //
 x = Synth(\bufScrub01, [\buf, b]);
+
+// the \targetZc argument is the main control for extreme chaotic behaviour
+x = Synth(\bufScrub01, [\buf, b, \targetZc, 1000]); // default value, noise and recognisable audio alternate
+x = Synth(\bufScrub01, [\buf, b, \targetZc, 100]); // lower values will result in more recognisable audio to be present
+x = Synth(\bufScrub01, [\buf, b, \targetZc, 2000]); // quite noisy, recognisable audio still comes back 
 x.free;
 
 
