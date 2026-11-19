@@ -10,7 +10,7 @@ SynthDef(\noinReson01, {
 	var snd, fb, env, trig, freqStep;
 	fb = LocalIn.ar(1);
 	env = Amplitude.ar(fb, 0.0001);
-	trig = (HPZ1.ar(env) > 0.01) & (env > \threshold.kr(0.001));
+	trig = (HPZ1.ar(env) > 0.01) * (env > \threshold.kr(0.001));
 
 	freqStep = Stepper.ar(HenonC.ar(10) + trig.linlin(0, 1, -1, 1), reset: 0, min: \stepMin.kr(-12), max: \stepMax.kr(12), step: \step.kr(-4));
 	freqStep = Lag.ar(freqStep, 0.5 + env);
